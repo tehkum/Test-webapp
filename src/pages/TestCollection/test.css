@@ -1,0 +1,67 @@
+.test-collection-box {
+    padding: 1rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.sec-admin-edit {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.test-collection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.test-collection-box-updatetime {
+    color: #666;
+    margin-top: 0px;
+}
+
+.test-collection-box h2 {
+    margin-bottom: 2px;
+}
+
+.test-collection-box-questions {
+    margin-bottom: 2px;
+}
+
+.test-collection-box-time {
+    margin-top: 0px
+}
+
+.btn-primary {
+    background-color: rgba(85, 83, 255, 1);
+    padding: .5rem 1rem;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: rgb(32, 29, 206);
+}
+
+.btn-close {
+    border: none;
+    background-color: transparent;
+    color: red;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+.copy-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgb(32, 29, 206);
+}

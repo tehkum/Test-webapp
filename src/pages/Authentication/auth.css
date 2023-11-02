@@ -1,0 +1,26 @@
+main {
+    max-width: 700px;
+    margin: 30px auto;
+}
+
+.auth-form textarea {
+    resize: none;
+    min-height: 200px;
+}
+
+.auth-form label {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin-bottom: 20px; */
+}
+
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
+    width: 100%;
+    border: 1px solid #c2c2c3;
+    padding: .75rem 1.25rem;
+    font-size: 18px;
+    border-radius: 4px;
+    /* gap: 5rem; */
+}

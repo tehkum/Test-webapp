@@ -1,0 +1,19 @@
+
+
+.small-heading {
+  color: rgba(85, 83, 255, 1);
+  font-weight: bold;
+}
+
+.large-heading {
+  font-size: 36px;
+  color: #122658;
+}
+
+.loader-center {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

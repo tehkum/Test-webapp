@@ -1,0 +1,66 @@
+.container-add-quiz {
+    max-width: 700px;
+    padding: .75rem;
+    margin: 30px auto;
+}
+
+.container-add-quiz div {
+    border: 1px dashed #c2c2c2;
+    padding: .5rem;
+}
+
+.btn-option,
+.btn-add {
+    padding: .5rem 1rem;
+    transition: ease 200ms;
+}
+
+.btn-option {
+    border: none;
+    background-color: transparent;
+    color: blue;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-option:hover {
+    color: rgb(17, 17, 203);
+}
+
+.btn-add {
+    width: 100%;
+    margin-top: 10px;
+    background-color: rgba(85, 83, 255, 1);
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: rgb(32, 29, 206);
+}
+
+.container-add-quiz textarea {
+    resize: none;
+    min-height: 200px;
+}
+
+.container-add-quiz label {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.container-add-quiz input,
+.container-add-quiz select,
+.container-add-quiz textarea {
+    width: 100%;
+    border: 1px solid #c2c2c3;
+    padding: .75rem 1.25rem;
+    font-size: 18px;
+    border-radius: 4px;
+    /* gap: 5rem; */
+}

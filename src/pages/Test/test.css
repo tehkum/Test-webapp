@@ -1,0 +1,27 @@
+.answer-options {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn-group {
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* align-items: center; */
+    justify-content: flex-end
+}
+
+.nav-questions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.question-nav {
+    border: 1px solid #c2c2c2;
+    padding: .5rem;
+}
+
+.question-nav-done {
+    background-color: green;
+    color: white;
+}
