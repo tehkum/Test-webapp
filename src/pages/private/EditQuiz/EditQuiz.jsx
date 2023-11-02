@@ -26,7 +26,7 @@ export default function EditQuiz() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/quiz/${id}`)
+      .get(`https://quizwebapp-dhe6.onrender.com/quiz/${id}`)
       .then((res) => setForm(res.data.quiz))
       .catch((err) => console.error(err));
   }, [id]);
