@@ -95,7 +95,11 @@ export default function TestCollection() {
                 </p>
                 <p
                   className="copy-link"
-                  onClick={() => copy(`localhost:5173/${quiz?._id}`)}
+                  onClick={() =>
+                    copy(
+                      `https://thunderous-marshmallow-1de24a.netlify.app/${quiz?._id}`
+                    )
+                  }
                 >
                   Share test link <ContentCopyIcon sx={{ cursor: "pointer" }} />
                 </p>
