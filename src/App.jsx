@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import "./App.css";
 import Signup from "./pages/Authentication/Signup/signup";
 import Login from "./pages/Authentication/Login/login";
@@ -24,6 +24,7 @@ function App() {
             </Layout>
           }
         />
+          <Route path="*" element={<Navigate to="/home" />} />
         <Route
           path="/signup"
           element={
