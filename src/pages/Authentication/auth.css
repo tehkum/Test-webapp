@@ -1,4 +1,4 @@
-main {
+.auth-form {
     max-width: 700px;
     margin: 30px auto;
 }
@@ -23,4 +23,18 @@ main {
     font-size: 18px;
     border-radius: 4px;
     /* gap: 5rem; */
+}
+
+@media(max-width: 500px) {
+    .auth-form {
+        max-width: 250px;
+        margin: 30px 0;
+        padding: .5rem;
+    }
+
+    /* .auth-form input,
+    .auth-form select,
+    .auth-form textarea {
+        max-width: 250px;
+    } */
 }

@@ -9,6 +9,7 @@ import Test from "./pages/Test/Test";
 import EditQuiz from "./pages/private/EditQuiz/EditQuiz";
 import Header from "./components/header/Header";
 import Result from "./pages/Result/result";
+import IsLoggedIn from "./components/layout/isLoggedIn";
 
 function App() {
   return (
@@ -23,11 +24,46 @@ function App() {
             </Layout>
           }
         />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/test/:id" element={<Test />} />
-        <Route path="/result/:id" element={<Result />} />
-        <Route path="/edit/:id" element={<EditQuiz />} />
+        <Route
+          path="/signup"
+          element={
+            <IsLoggedIn>
+              <Signup />
+            </IsLoggedIn>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <IsLoggedIn>
+              <Login />
+            </IsLoggedIn>
+          }
+        />
+        <Route
+          path="/test/:id"
+          element={
+            <Layout>
+              <Test />
+            </Layout>
+          }
+        />
+        <Route
+          path="/result/:id"
+          element={
+            <Layout>
+              <Result />
+            </Layout>
+          }
+        />
+        <Route
+          path="/edit/:id"
+          element={
+            <Layout>
+              <EditQuiz />
+            </Layout>
+          }
+        />
         <Route
           path="/quiz/add"
           element={
