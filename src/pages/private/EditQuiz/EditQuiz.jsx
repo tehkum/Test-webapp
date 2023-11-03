@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editQuiz } from "../../../context/features/quizSlice";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../../utils";
 
 export default function EditQuiz() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function EditQuiz() {
 
   useEffect(() => {
     axios
-      .get(`https://quizwebapp-dhe6.onrender.com/quiz/${id}`)
+      .get(`${API_URL}/quiz/${id}`)
       .then((res) => setForm(res.data.quiz))
       .catch((err) => console.error(err));
   }, [id]);
