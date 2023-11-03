@@ -14,19 +14,20 @@ const Signup = () => {
   const [displayName, setDisplayName] = useState("");
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.user);
-  const [role, setRole] = useState("student");
+  const [role, setRole] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     await createUserWithEmailAndPassword(auth, email, password, displayName)
       .then(async (userCredential) => {
+        console.log(role === "teacher");
         if (role === "teacher") {
-          await dispatch(
-            addUser({ email: email, displayName: displayName, iAdmin: true })
+          dispatch(
+            addUser({ email: email, displayName: displayName, isAdmin: true })
           );
         } else {
-          await dispatch(addUser({ email: email, displayName: displayName }));
+          dispatch(addUser({ email: email, displayName: displayName }));
         }
         const user = userCredential.user;
         console.log(user);
@@ -39,7 +40,6 @@ const Signup = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        // ..
       });
   };
 
@@ -70,14 +70,20 @@ const Signup = () => {
                   type="email"
                   label="Email address"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(() => e.target.value)}
                   required
                   placeholder="Email address"
                 />
               </div>
               <div>
                 <label htmlFor="email-address">Role</label>
-                <select onChange={(e) => setRole(e.target.value)} value={role}>
+                <select
+                  onChange={(e) => {
+                    setRole(e.target.value);
+                    console.log(role);
+                  }}
+                  value={role}
+                >
                   <option value="student">Student</option>
                   <option value="teacher">Teacher</option>
                 </select>

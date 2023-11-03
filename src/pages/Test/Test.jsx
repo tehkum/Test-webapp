@@ -17,8 +17,9 @@ export default function Test() {
   }, [id]);
 
   const [question, setQuestion] = useState(0);
+  const [time, setTime] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   const { quiz, status } = useSelector((state) => state.quiz);
-  // const test = useSelector((state) => state.test);
   const [testCompleted, setTestCompleted] = useState(false);
   const [answerSheet, setAnswerSheet] = useState({
     quiz: id,
@@ -35,6 +36,7 @@ export default function Test() {
 
   useEffect(() => {
     if (status === "success") {
+      setTime(quiz?.timer);
       setAnswer((prev) => ({
         ...prev,
         statement: quiz?.questions[question]?.statement,
@@ -57,12 +59,30 @@ export default function Test() {
     }
   };
 
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      } else if (seconds === 0) {
+        if (time === 0) {
+          clearInterval(countdown);
+          dispatch(addTest(answerSheet));
+          navigate("/home");
+        } else {
+          setTime(time - 1);
+          setSeconds(59);
+        }
+      }
+    }, 1000);
+    return () => clearInterval(countdown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [time, seconds]);
+
   return (
     <div className="container-home">
-      {/* <p>
-        Time: {String(minutes).padStart(2, "0")}:
-        {String(seconds).padStart(2, "0")}
-      </p> */}
+      <p>
+        Time remaining: {time}:{seconds < 10 ? `0${seconds}` : seconds}
+      </p>
       {status === "pending" || status === "idle" ? (
         <p>...loading</p>
       ) : (
@@ -108,18 +128,6 @@ export default function Test() {
           <button
             onClick={() => {
               dispatch(addTest(answerSheet));
-              // dispatch(
-              //   editUser({
-              //     ...user?.user,
-              //     testGiven: [...user.user.testGiven, test._id],
-              //   })
-              // );
-              // dispatch(
-              //   editQuiz({
-              //     ...quiz,
-              //     givenBy: [...quiz.givenBy, localStorage.getItem("userId")],
-              //   })
-              // );
               navigate("/home");
             }}
           >
