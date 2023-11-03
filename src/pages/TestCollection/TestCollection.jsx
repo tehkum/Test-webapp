@@ -66,53 +66,57 @@ export default function TestCollection() {
           <CircularProgress />
         </div>
       ) : (
-        quizes?.map((quiz, index) => (
-          <div key={index} className="test-collection-box">
-            {user?.user.isAdmin && (
-              <span className="sec-admin-edit">
-                <EditIcon
-                  style={{ ...iconStyle }}
-                  onClick={() => navigate(`/edit/${quiz?._id}`)}
-                />
-                <DeleteIcon
-                  style={{ ...iconStyle }}
-                  onClick={() => dispatch(removeQuiz(quiz?._id))}
-                />
-              </span>
-            )}
-            <div>
-              <h2>{quiz?.quizName}</h2>
-              <p className="test-collection-box-updatetime">
-                {convertISOToReadableFormat(quiz?.updatedAt)}
-              </p>
-              <p className="test-collection-box-questions">
-                {quiz?.questions?.length} questions
-              </p>
-              <p className="test-collection-box-time">{quiz?.timer} minutes</p>
-              <p
-                className="copy-link"
-                onClick={() => copy(`localhost:5173/${quiz?._id}`)}
-              >
-                Share test link <ContentCopyIcon sx={{ cursor: "pointer" }} />
-              </p>
+        <div className="dashboard">
+          {quizes?.map((quiz, index) => (
+            <div key={index} className="test-collection-box">
+              {user?.user.isAdmin && (
+                <span className="sec-admin-edit">
+                  <EditIcon
+                    style={{ ...iconStyle }}
+                    onClick={() => navigate(`/edit/${quiz?._id}`)}
+                  />
+                  <DeleteIcon
+                    style={{ ...iconStyle }}
+                    onClick={() => dispatch(removeQuiz(quiz?._id))}
+                  />
+                </span>
+              )}
+              <div>
+                <h2>{quiz?.quizName}</h2>
+                <p className="test-collection-box-updatetime">
+                  {convertISOToReadableFormat(quiz?.updatedAt)}
+                </p>
+                <p className="test-collection-box-questions">
+                  {quiz?.questions?.length} questions
+                </p>
+                <p className="test-collection-box-time">
+                  {quiz?.timer} minutes
+                </p>
+                <p
+                  className="copy-link"
+                  onClick={() => copy(`localhost:5173/${quiz?._id}`)}
+                >
+                  Share test link <ContentCopyIcon sx={{ cursor: "pointer" }} />
+                </p>
+              </div>
+              {quiz?.givenBy?.find(
+                (item) => item === localStorage.getItem("userId")
+              ) ? (
+                <p>Test already given</p>
+              ) : (
+                <button
+                  className="btn-primary"
+                  onClick={() => {
+                    setValue(quiz);
+                    handleOpen();
+                  }}
+                >
+                  Start test
+                </button>
+              )}
             </div>
-            {quiz?.givenBy?.find(
-              (item) => item === localStorage.getItem("userId")
-            ) ? (
-              <p>Test already given</p>
-            ) : (
-              <button
-                className="btn-primary"
-                onClick={() => {
-                  setValue(quiz);
-                  handleOpen();
-                }}
-              >
-                Start test
-              </button>
-            )}
-          </div>
-        ))
+          ))}
+        </div>
       )}
       <Modal
         open={open}

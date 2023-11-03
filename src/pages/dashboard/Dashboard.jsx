@@ -8,12 +8,10 @@ export default function Dashboard() {
   const { status, userTests } = useSelector((state) => state.test);
 
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchUserTest(localStorage.getItem("userId")));
-    }
+    // if (status === "idle") {
+    dispatch(fetchUserTest(localStorage.getItem("userId")));
+    // }
   }, [status, dispatch]);
-
-  console.log(userTests);
 
   const scoreCalculator = (items) => {
     return items?.test?.reduce(

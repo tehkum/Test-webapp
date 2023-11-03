@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { fetchQuiz } from "../../context/features/quizSlice";
+import { changeState, fetchQuiz } from "../../context/features/quizSlice";
 import "./test.css";
 import { addTest } from "../../context/features/testSlice";
 
@@ -127,6 +127,7 @@ export default function Test() {
         {testCompleted && (
           <button
             onClick={() => {
+              dispatch(changeState());
               dispatch(addTest(answerSheet));
               navigate("/home");
             }}
