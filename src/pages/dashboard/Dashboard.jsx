@@ -1,25 +1,23 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserTest } from "../../context/features/testSlice";
+import {
+  changeTestState,
+  fetchUserTest,
+} from "../../context/features/testSlice";
 import "./dashboard.css";
+import { useNavigate } from "react-router";
+import { scoreCalculator } from "../../utils";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
   const { status, userTests } = useSelector((state) => state.test);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // if (status === "idle") {
     dispatch(fetchUserTest(localStorage.getItem("userId")));
     // }
   }, [status, dispatch]);
-
-  const scoreCalculator = (items) => {
-    return items?.test?.reduce(
-      (acc, item) =>
-        +item?.correctAnswer === +item?.givenAnswer ? acc + 1 : acc,
-      0
-    );
-  };
 
   return (
     <div className="dashboard">
@@ -36,6 +34,17 @@ export default function Dashboard() {
             <p className="test-collection-box-time">
               {item?.quiz?.timer} minutes
             </p>
+          </div>
+          <div>
+            <button
+              className="btn-primary"
+              onClick={() => {
+                dispatch(changeTestState());
+                navigate(`/result/${item._id}`);
+              }}
+            >
+              See Full Stats
+            </button>
           </div>
         </div>
       ))}

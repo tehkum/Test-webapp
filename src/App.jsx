@@ -8,6 +8,7 @@ import Layout from "./components/layout/Layout";
 import Test from "./pages/Test/Test";
 import EditQuiz from "./pages/private/EditQuiz/EditQuiz";
 import Header from "./components/header/Header";
+import Result from "./pages/Result/result";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/test/:id" element={<Test />} />
+        <Route path="/result/:id" element={<Result />} />
         <Route path="/edit/:id" element={<EditQuiz />} />
         <Route
           path="/quiz/add"

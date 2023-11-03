@@ -25,3 +25,11 @@ export function convertISOToReadableFormat(isoString) {
   const minutes = date.getMinutes().toString().padStart(2, "0");
   return `${month}, ${year} ${hours}:${minutes}`;
 }
+
+export const scoreCalculator = (items) => {
+  return items?.test?.reduce(
+    (acc, item) =>
+      +item?.correctAnswer === +item?.givenAnswer ? acc + 1 : acc,
+    0
+  );
+};

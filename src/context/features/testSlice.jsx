@@ -34,7 +34,11 @@ export const testSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    changeTestState: (state) => {
+      state.status = "idle";
+    },
+  },
   extraReducers: {
     [fetchUserTest.pending]: (state) => {
       state.status = "pending";
@@ -84,3 +88,5 @@ export const testSlice = createSlice({
     },
   },
 });
+
+export const { changeTestState } = testSlice.actions;
