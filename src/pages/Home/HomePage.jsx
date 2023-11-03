@@ -11,13 +11,13 @@ import Dashboard from "../dashboard/Dashboard";
 import TestCollection from "../TestCollection/TestCollection";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../context/features/userSlice";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 const HomePage = () => {
   const { status, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [value, setValue] = useState("1");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -42,15 +42,6 @@ const HomePage = () => {
 
   return (
     <div className="container-home">
-      <button
-        className="btn-delete"
-        onClick={() => {
-          localStorage.removeItem("userId");
-          navigate("/login");
-        }}
-      >
-        Logout
-      </button>
       <p className="small-heading">Home Section</p>
       <h1 className="large-heading">Welcome {user?.displayName}!</h1>
       <TabContext value={value}>

@@ -3,24 +3,24 @@ import axios from "axios";
 import { API_URL } from "../../utils";
 
 export const fetchUserTest = createAsyncThunk(
-  "user/fetchUserTest",
+  "test/fetchUserTest",
   async (id) => {
     const res = await axios.get(`${API_URL}/test/user/${id}`);
     return res.data;
   }
 );
 
-export const fetchTest = createAsyncThunk("user/fetchTest", async (id) => {
+export const fetchTest = createAsyncThunk("test/fetchTest", async (id) => {
   const res = await axios.get(`${API_URL}/test/${id}`);
   return res.data;
 });
 
-export const fetchTests = createAsyncThunk("user/fetchTests", async () => {
+export const fetchTests = createAsyncThunk("test/fetchTests", async () => {
   const res = await axios.get(`${API_URL}/test/`);
   return res.data;
 });
 
-export const addTest = createAsyncThunk("user/fetchTests", async (data) => {
+export const addTest = createAsyncThunk("test/addTest", async (data) => {
   const res = await axios.post(`${API_URL}/test/`, data);
   return res.data;
 });

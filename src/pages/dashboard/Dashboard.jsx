@@ -18,7 +18,7 @@ export default function Dashboard() {
   const scoreCalculator = (items) => {
     return items?.test?.reduce(
       (acc, item) =>
-        item?.correctAnswer === item?.givenAnswer ? acc + 1 : acc,
+        +item?.correctAnswer === +item?.givenAnswer ? acc + 1 : acc,
       0
     );
   };

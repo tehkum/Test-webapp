@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchQuizes, removeQuiz } from "../../context/features/quizSlice";
+import {
+  changeState,
+  fetchQuizes,
+  removeQuiz,
+} from "../../context/features/quizSlice";
 import "./test.css";
 import { convertISOToReadableFormat } from "../../utils";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -85,7 +89,10 @@ export default function TestCollection() {
                 {quiz?.questions?.length} questions
               </p>
               <p className="test-collection-box-time">{quiz?.timer} minutes</p>
-              <p className="copy-link" onClick={() => copy(`/${quiz?._id}`)}>
+              <p
+                className="copy-link"
+                onClick={() => copy(`localhost:5173/${quiz?._id}`)}
+              >
                 Share test link <ContentCopyIcon sx={{ cursor: "pointer" }} />
               </p>
             </div>
@@ -120,7 +127,10 @@ export default function TestCollection() {
           <p>{value?.questions?.length} questions</p>
           <button
             className="btn-primary"
-            onClick={() => navigate(`/test/${value?._id}`)}
+            onClick={() => {
+              navigate(`/test/${value?._id}`);
+              dispatch(changeState());
+            }}
           >
             Confirm
           </button>

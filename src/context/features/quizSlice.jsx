@@ -35,7 +35,11 @@ export const quizSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    changeState: (state) => {
+      state.status = "idle";
+    },
+  },
   extraReducers: {
     [fetchQuizes.pending]: (state) => {
       state.status = "pending";
@@ -98,3 +102,5 @@ export const quizSlice = createSlice({
     },
   },
 });
+
+export const { changeState } = quizSlice.actions;

@@ -1,4 +1,5 @@
-export const API_URL = "https://quizwebapp.onrender.com";
+// export const API_URL = "https://quizwebapp.onrender.com";
+export const API_URL = "http://localhost:3000";
 
 // export function convertISOToReadableFormat(isoString) {
 //     const date = new Date(isoString);

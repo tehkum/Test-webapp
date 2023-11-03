@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { editQuiz, fetchQuiz } from "../../context/features/quizSlice";
+import { fetchQuiz } from "../../context/features/quizSlice";
 import "./test.css";
 import { addTest } from "../../context/features/testSlice";
-import { editUser, fetchUser } from "../../context/features/userSlice";
 
 export default function Test() {
   const { id } = useParams();
-  const [question, setQuestion] = useState(0);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchQuiz(id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  const [question, setQuestion] = useState(0);
   const { quiz, status } = useSelector((state) => state.quiz);
-  const test = useSelector((state) => state.test);
-  const user = useSelector((state) => state.user);
+  // const test = useSelector((state) => state.test);
   const [testCompleted, setTestCompleted] = useState(false);
   const [answerSheet, setAnswerSheet] = useState({
-    quiz: quiz?._id,
+    quiz: id,
     candidate: localStorage.getItem("userId"),
     test: [],
   });
@@ -26,14 +32,6 @@ export default function Test() {
     givenAnswer: "",
   });
   const navigate = useNavigate();
-
-  console.log(status);
-
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchQuiz(id));
-    }
-  }, [id, dispatch, status]);
 
   useEffect(() => {
     if (status === "success") {
@@ -46,12 +44,6 @@ export default function Test() {
     }
   }, [question, quiz, status]);
 
-  useEffect(() => {
-    if (user.status === "idle") {
-      dispatch(fetchUser(localStorage.getItem("userId")));
-    }
-  }, [dispatch, user]);
-
   const submitHandler = async () => {
     if (question < quiz?.questions?.length - 1) {
       setAnswerSheet({ ...answerSheet, test: [...answerSheet.test, answer] });
@@ -59,6 +51,7 @@ export default function Test() {
     } else {
       setAnswerSheet({ ...answerSheet, test: [...answerSheet.test, answer] });
       // dispatch(addTest(answerSheet));
+      console.log(answerSheet);
       setTestCompleted(true);
       // navigate(`/test/${test._id}`);
     }
@@ -70,7 +63,7 @@ export default function Test() {
         Time: {String(minutes).padStart(2, "0")}:
         {String(seconds).padStart(2, "0")}
       </p> */}
-      {status !== "success" ? (
+      {status === "pending" || status === "idle" ? (
         <p>...loading</p>
       ) : (
         <>
@@ -80,7 +73,7 @@ export default function Test() {
           </h1>
           <p>Choose the correct answer.</p>
           <div>
-            {quiz?.questions[question]?.options.map((item, index) => (
+            {quiz?.questions[question]?.options?.map((item, index) => (
               <label
                 key={index}
                 htmlFor={`question-${index}`}
@@ -89,9 +82,12 @@ export default function Test() {
                 <input
                   type="radio"
                   id={`question-${index}`}
-                  value={answer.givenAnwer}
-                  onChange={() => setAnswer({ ...answer, givenAnwer: index })}
-                  checked={answer.givenAnwer === index}
+                  value={answer.givenAnswer}
+                  onChange={() => {
+                    setAnswer({ ...answer, givenAnswer: index });
+                    console.log(answer);
+                  }}
+                  checked={answer.givenAnswer === index}
                   name={`answer-${question}`}
                 />
                 {item}
@@ -104,7 +100,7 @@ export default function Test() {
         <button
           className="btn-primary"
           onClick={submitHandler}
-          disabled={testCompleted}
+          // disabled={testCompleted}
         >
           Submit Answer
         </button>
@@ -112,18 +108,18 @@ export default function Test() {
           <button
             onClick={() => {
               dispatch(addTest(answerSheet));
-              dispatch(
-                editUser({
-                  ...user?.user,
-                  testGiven: [...user.user.testGiven, test._id],
-                })
-              );
-              dispatch(
-                editQuiz({
-                  ...quiz,
-                  givenBy: [...quiz.givenBy, localStorage.getItem("userId")],
-                })
-              );
+              // dispatch(
+              //   editUser({
+              //     ...user?.user,
+              //     testGiven: [...user.user.testGiven, test._id],
+              //   })
+              // );
+              // dispatch(
+              //   editQuiz({
+              //     ...quiz,
+              //     givenBy: [...quiz.givenBy, localStorage.getItem("userId")],
+              //   })
+              // );
               navigate("/home");
             }}
           >

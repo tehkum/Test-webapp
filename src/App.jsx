@@ -7,10 +7,12 @@ import AddQuiz from "./pages/private/AddQuiz/AddQuiz";
 import Layout from "./components/layout/Layout";
 import Test from "./pages/Test/Test";
 import EditQuiz from "./pages/private/EditQuiz/EditQuiz";
+import Header from "./components/header/Header";
 
 function App() {
   return (
     <>
+      <Header />
       <Routes>
         <Route
           path="/home"
